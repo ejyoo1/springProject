@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/views/decorators"> <!-- 템플릿 위치 -->
+	<decorator name="main" page="main_decorator.jsp"><!-- 적용할 템플릿 -->
+		<pattern>/index.do*</pattern><!-- 적용할 템플릿 URL -->
+	</decorator>
+	
+	<decorator name="openWindow" page="open_decorator.jsp">
+		<pattern>/**/*</pattern><!-- 2depth 까지 템플릿 처리 -->
+		<pattern>/main.do</pattern>
+	</decorator>
+	
+	<excludes>
+		<pattern>/resources/*</pattern> <!-- 리소스는 패턴 적용 제외. -->
+	</excludes>
+</decorators>

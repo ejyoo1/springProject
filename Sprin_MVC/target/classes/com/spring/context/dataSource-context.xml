@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="dataSource"
+				class="org.apache.commons.dbcp2.BasicDataSource" 
+				p:driverClassName="${jdbc.driverClassName}"
+				p:url="${jdbc.url}"
+				p:username="${jdbc.username}"
+				p:password="${jdbc.password}"
+				p:maxIdle="2"
+				p:maxTotal="2"
+				/>
+				
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+				p:dataSource-ref="dataSource"
+				p:configLocation="classpath:com/spring/mybatis/sqlConfig.xml"
+				p:mapperLocations="classpath:com/spring/mybatis/*-Mapper.xml" />
+				
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+	      c:sqlSessionFactory-ref="sqlSessionFactory" />
+	
+	<!-- 서비스 메서드 실행하기 전에 실행할 때 마다 관찰, rollback과 commit 담당 -->      
+	<bean id="transactionManager"
+	      class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	      p:dataSource-ref="dataSource" />
+
+</beans>

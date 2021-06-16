@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Menu-Mapper">
+
+	<select id="selectMainMenu" resultType="menu">
+		SELECT MCODE
+	    , MNAME
+	    , MURL
+	    , MICON
+	    , JTEXT
+	    , UPCODE
+	    , MLEVEL
+	    , ISNAV
+		FROM MENU 
+		WHERE MCODE LIKE '%'||'0000'||'%' 
+		ORDER BY MCODE ASC
+	</select>
+	
+	<select id="selectSubMenu" resultType="menu">
+		SELECT MCODE
+	    , MNAME
+	    , MURL
+	    , MICON
+	    , JTEXT
+	    , UPCODE
+	    , MLEVEL
+	    , ISNAV
+		FROM MENU
+		WHERE UPCODE = #{MCODE} AND ISNAV = 1
+	</select>	
+	
+	<select id="selectMenuByMcode" resultType="menu">
+		SELECT MCODE
+	    , MNAME
+	    , MURL
+	    , MICON
+	    , JTEXT
+	    , UPCODE
+	    , MLEVEL
+	    , ISNAV 
+		FROM MENU
+		WHERE MCODE = #{MCODE}
+	</select>
+	
+	<select id="selectMenuByMname" resultType="menu">
+		select *
+		from menu
+		where mName = #{mName}
+	</select>
+	
+</mapper>
