@@ -37,7 +37,10 @@ public class CommonController {
    
    @RequestMapping(value="/common/login",method=RequestMethod.POST)
    public String loginPost(LoginCommand loginReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
-      String url = "redirect:/index.do";
+	   // 리플렉션으로 인해 브라우저에서 오는 id, pwd를 찾아 자동으로 넣어준다.
+	   // redirect 할 때 넘겨줄 데이터가 있을 때, RedirectAttributes 객체를 사용한다.
+	   // RedirectAttributes 는 HandlerAdapter가 주는 것이다.
+	   String url = "redirect:/index.do";
       
       HttpSession session = request.getSession();
       
