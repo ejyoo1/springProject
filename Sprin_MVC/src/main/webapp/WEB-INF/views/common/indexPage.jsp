@@ -24,7 +24,7 @@
 	<!-- handlebars -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
 	<!-- page script -->
-	<script src="/resources/js/index.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/index.js"></script>
 	<script type="text/x-handlebars-template"  id="subMenu-list-template" >
 	{{#each .}}
 		<li class="nav-item subMenu" >

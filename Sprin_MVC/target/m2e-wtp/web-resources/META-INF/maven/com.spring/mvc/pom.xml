@@ -23,6 +23,8 @@
 		<org.mybatis-version>3.5.3</org.mybatis-version>
 		<mybatis.spring-version>2.0.3</mybatis.spring-version>
 		<opensymphony.sitemesh-version>2.4.2</opensymphony.sitemesh-version>
+		<com.jackson-databind-version>2.9.8</com.jackson-databind-version>
+		<commons.fileupload-version>1.3.1</commons.fileupload-version>
 
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -82,6 +84,24 @@
 			<artifactId>sitemesh</artifactId>
 			<version>${opensymphony.sitemesh-version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${com.jackson-databind-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons.fileupload-version}</version>
+		</dependency>
+		
+		
+		
+		
 
 
 		<!-- AspectJ -->

@@ -3,7 +3,6 @@ package com.spring.command;
 import org.apache.log4j.Logger;
 
 public class PageMaker {
-	private static final Logger INFO_LOGGER = Logger.getLogger(PageMaker.class);
 	
 	private int totalCount; // 전체 행의 개수 (fix Data - 개발자가 결정하는 데이터)
 	private int startPage = 1; // 시작 페이지 번호
@@ -18,15 +17,10 @@ public class PageMaker {
 	
 	// startPage, endPage
 	private void calcDate() { // DB에서 totalCount 가져올 때 호출
-		INFO_LOGGER.info("cri.getPage() : " + cri.getPage());
-		INFO_LOGGER.info("cri.getPerPageNum() : " + cri.getPerPageNum());
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum); // (15 / 10) => 1.5 => 소수 첫째자리 수 올림 => * 10 ==> Math함수는 1의 자리 올림이 없음.
-		INFO_LOGGER.info("endPage : " + endPage);
 		startPage = (endPage - displayPageNum) + 1;
-		INFO_LOGGER.info("startPage : " + startPage);
 		
 		realEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum())); // 실제 마지막 페이지
-		INFO_LOGGER.info("realEndPage : " + realEndPage);
 		
 		if(startPage < 0) {
 			startPage = 1;

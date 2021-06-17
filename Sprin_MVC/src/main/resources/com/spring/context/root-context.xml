@@ -8,6 +8,23 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
    <context:property-placeholder file-encoding="utf-8"
                           location="classpath:com/spring/properties/*.properties" />
+   
+   <!-- properties 를 읽어와서 Bean으로 생성 -->
+   <!-- boardImgPath -->
+   <bean id="imgPath" class="java.lang.String">
+   	<constructor-arg value="${summernote.img}" />
+   </bean>
+   
+   <!-- member.picture -->
+   <bean id="picturePath" class="java.lang.String">
+   	<constructor-arg value="${member.picture.upload}" />
+   </bean>
+   
+   <!-- file upload -->
+   <bean id="fileUploadPath" class="java.lang.String">
+   	<constructor-arg value="${pds.upload}" />
+   </bean>
+   
    <import resource="./dataSource-context.xml"/>
    
 	 <import resource="./application-context.xml"/>

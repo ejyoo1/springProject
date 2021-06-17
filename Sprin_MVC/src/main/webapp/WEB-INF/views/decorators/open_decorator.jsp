@@ -17,7 +17,7 @@
 <decorator:body /><!-- 각 페이지에서 body를 만들도록 -->
 
 <%@ include file="/WEB-INF/views/include/js.jsp" %>
-<script src="/resources/js/common.js" ></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js" ></script>
 </body>
 
 </html>

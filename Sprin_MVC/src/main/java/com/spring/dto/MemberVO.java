@@ -1,6 +1,6 @@
 package com.spring.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MemberVO {
 	private String id; // 아이디
@@ -54,7 +54,7 @@ public class MemberVO {
 	public Date getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegDate(Date regdate) {
 		this.regdate = regdate;
 	}
 	public String getAuthority() {
