@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 외부 property 파일 로딩 두개 이상일 경우 콤마로 구분하여 작성함. -->
 	<context:property-placeholder file-encoding="utf-8"
                           location="classpath:com/spring/properties/*.properties" />
                           

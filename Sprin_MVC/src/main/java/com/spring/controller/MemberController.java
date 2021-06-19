@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -157,6 +158,18 @@ public class MemberController {
 	// 엔터티 이용, ioUtils 사용하여  Byte 단위로 ResponseEntity 에 넣으면 HandlerAdaptor가 넣어줌.
 	// 무슨 데이터를 내보낼 지 집중.
 	// Byte 단위면 ResponseEntity가 Response에 넣어 내보내게 됨. ==> FileDownloadResolver가 필요없음.
+	
+	@RequestMapping(value = "/getPictureById/{id}", method=RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public ResponseEntity<byte[]> getPictureById(@PathVariable("id") String id) throws Exception {
+		ResponseEntity<byte[]> entity = null;
+		
+		String picture = memberService.getMember(id).getPicture();
+		entity = getPicture(picture);
+		
+		return entity;
+	}
+	
 	
 	// 아이디 체크
 	@RequestMapping("/idCheck")

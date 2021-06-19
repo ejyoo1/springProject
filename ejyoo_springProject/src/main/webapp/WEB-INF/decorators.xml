@@ -12,5 +12,6 @@
 	
 	<excludes>
 		<pattern>/resources/*</pattern> <!-- 리소스는 패턴 적용 제외. -->
+		<pattern>**/log**</pattern>
 	</excludes>
 </decorators>

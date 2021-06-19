@@ -6,7 +6,7 @@
 {{#each .}}
 <div class="replyLi" >
    <div class="user-block">
-       <img src="/member/getPictureById.do?id={{replyer}}" class="img-circle img-bordered-sm">
+       <img src="<%=request.getContextPath()%>/member/getPictureById/{{replyer}}" class="img-circle img-bordered-sm">
    </div>
     <div class="timeline-item" >
         <span class="time">
@@ -60,15 +60,16 @@
 <script> //댓글리스트
 var replyPage = 1; // 무조건 1번 페이지 보이게 함. (리스트 뿌릴 때 페이지 기준)
 
-window.onload=function(){ // jquery 라이브러리 로드 전에 실행되므로 onload 함수 감싸줌.
-	getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+window.onload=function(){ // jquery 라이브러리 로드 전에 실행되므로 onload 함수 감싸줌.//boardReplyController
+	getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+replyPage);
 	
 	// 만들어진 li에 이벤트 먹이기(고전방식)
 	$('.pagination').on('click','li a', function(event){
 		//alert($(this).attr("href"));
 		if($(this).attr("href")) {
 			replyPage = $(this).attr("href");
-			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+			//boardReplyController url
+			getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+replyPage);
 		}
 		return false;
 	});	
@@ -149,20 +150,21 @@ function replyRegist_go(){
 			"replytext":replytext
 	}
 	
+	//boardReplyController url
 	$.ajax({
-		url:"/reply/regist.do",
+		url:"<%=request.getContextPath()%>/replies",
 		type:"post",
-		data:JSON.stringify(data),
+		data:JSON.stringify(data),	
 		contentType:'application/json',
 		success:function(data){
 			var result=data.split(',');
 			if(result[0]=="SUCCESS"){
 				alert('댓글이 등록되었습니다.');
-				replyPage=result[1]; // 페이지 출력
-				getPage("/reply/list.do?bno="+bno+"&page="+result[1]); // 리스트 출력
-				$('#newReplyText').val("");
+				replyPage=result[1]; //페이지이동
+				getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+result[1]); //리스트 출력
+				$('#newReplyText').val("");				
 			}else{
-				alert('댓글 등록이 실패했습니다.');
+				alert('댓글이 등록을 실패했습니다.');	
 			}
 		}
 	});
@@ -183,18 +185,23 @@ function replyModify_go(){
 	var replytext=$('#replytext').val();
 	
 	var sendData={
-			rno : rno,
 			replytext:replytext
 	}
 	
+	//boardReplyController url (path variable 연습)
+	//type : put,fatch, delete 인식이 브라우저마다 다름.
+	//headers : 브라우저가 put, fatch 처리 위해 설정
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/modify.do",
-		type:"post",
+		url:"<%=request.getContextPath()%>/replies/"+rno,
+		type:"put",
+		headers:{
+			"X-HTTP-Method-Override":"PUT"
+		},
 		data:JSON.stringify(sendData),
 		contentType:'application/json',
 		success:function(data){
 				alert('댓글이 수정되었습니다.');
-				getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage); // 리스트 출력
+				getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+replyPage); // 리스트 출력
 		},
 		error:function(error){ // throw 하면 error 코드를 부여하지 않으므로 주의!
 			alert('수정 실패했습니다.');
@@ -208,12 +215,18 @@ function replyModify_go(){
 function replyRemove_go(){
 	var rno=$('.modal-title').text();
 	
+	//boardReplyController url (path variable 연습)
+	//type : put,fatch, delete 인식이 브라우저마다 다름.
+	//headers : 브라우저가 put, fatch 처리 위해 설정
 	$.ajax({
-		url:"<%=request.getContextPath()%>/reply/remove.do?rno="+rno+"&page="+replyPage+"&bno=${board.bno}",
-		type:"get",
+		url:"<%=request.getContextPath()%>/replies/${board.bno}/"+rno+"/"+replyPage,
+		type:"delete",
+		headers:{
+			"X-HTTP-Method-Override":"delete"
+		},
 		success:function(page){
 				alert('삭제되었습니다.');
-				getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+page); // 리스트 출력
+				getPage("<%=request.getContextPath()%>/replies/${board.bno}/"+page); // 리스트 출력
 				replyPage=page;
 		},
 		error:function(error){ // throw 하면 error 코드를 부여하지 않으므로 주의!

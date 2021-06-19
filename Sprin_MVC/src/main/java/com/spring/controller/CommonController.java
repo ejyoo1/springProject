@@ -52,6 +52,7 @@ public class CommonController {
          session.setAttribute("loginUser", memberService.getMember(loginReq.getId()));
          session.setMaxInactiveInterval(6*60);
       } catch (SQLException e) {
+    	 rttr.addFlashAttribute("msg","시스템 장애가 발생하였습니다. \n 관리자에게 문의해주세요.");
          e.printStackTrace();
          throw e;
       } catch (NotFoundIDException | InvalidPasswordException e) {
