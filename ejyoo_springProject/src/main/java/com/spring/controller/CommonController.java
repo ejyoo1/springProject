@@ -133,6 +133,30 @@ public class CommonController {
 	   return entity;
    }
    
-   
+   @RequestMapping("/subMenu")
+	@ResponseBody
+	public ResponseEntity<List<MenuVO>> subMenu(String mCode)throws Exception{
+
+		ResponseEntity<List<MenuVO>> entity = null;
+
+		try {
+				List<MenuVO> menuList = menuService.getSubMenuList(mCode);
+
+				entity = new ResponseEntity<List<MenuVO>>(menuList, HttpStatus.OK) ;
+		}catch(SQLException e) {
+				entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR) ;
+		}
+
+
+		return entity;
+	}
+
+	@RequestMapping(value="/common/logout",method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		String url="redirect:/";
+		session.invalidate();
+
+		return url;
+	}
    
 }

@@ -8,8 +8,29 @@
 	<!-- 외부 property 파일 로딩 두개 이상일 경우 콤마로 구분하여 작성함. -->
 	<context:property-placeholder file-encoding="utf-8"
                           location="classpath:com/spring/properties/*.properties" />
-                          
+	<!-- boardImgPath -->
+	<bean id="imgPath" class="java.lang.String">
+		<constructor-arg value="${summernote.img}" />      
+	</bean>
+
+	<!-- member.picture -->
+	<bean id="picturePath" class="java.lang.String">
+		<constructor-arg value="${member.picture.upload}" />      
+	</bean>
+
+	<!-- file upload 
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${pds.upload}"/>
+	</bean>-->
+	
+	
+	
+	
+	                      
   <import resource="./dataSource-context.xml"/>
   <import resource="./application-context.xml"/>
 		
+		
+		
+  
 </beans>

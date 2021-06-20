@@ -60,7 +60,7 @@ function upload_go(){
 	}
 	
 	$.ajax({
-		url : "/member/picture.do",
+		url : "picture.do",
 		data : formData,
 		type : 'post',
 		processData : false,

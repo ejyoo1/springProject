@@ -17,7 +17,7 @@
 		<%@ include file="/WEB-INF/views/include/main_asside.jsp" %>
 		
 		<div class="content-wrapper">
-			<iframe name="ifr" src="/main.do" frameborder="0" style="width:100%;height:85vh;"></iframe>
+			<iframe name="ifr" src="<%=request.getContextPath() %>/main.do" frameborder="0" style="width:100%;height:85vh;"></iframe>
 		</div> <!-- ./content-wrapper -->
 		<%@ include file="/WEB-INF/views/include/main_footer.jsp" %>
 	
@@ -28,7 +28,7 @@
 	<script type="text/x-handlebars-template"  id="subMenu-list-template" >
 	{{#each .}}
 		<li class="nav-item subMenu" >
-      	<a href="javascript:goPage('{{murl}}','{{mcode}}');initPageParam();" class="nav-link">
+      	<a href="javascript:goPage('<%=request.getContextPath()%>{{murl}}','{{mcode}}');initPageParam();" class="nav-link">
           <i class="{{micon}}"></i>
              <p>{{mname}}</p>
         </a>
@@ -37,7 +37,7 @@
 	</script>
 	<script>
 	function init(){ // 문서가 다 로드된 뒤에 읽을 수 있도록 설정(JQuery 인식 못하는 문제 해결) ==> JQuery는 문서가 다 읽어진 후에 적용됨 ( 작업최소화해야 함. 페이지 퍼포먼스 떨어짐. )
-		goPage('${menu.murl}','${menu.mcode}'); // 페이지 유지
+		goPage('<%=request.getContextPath()%>${menu.murl}','${menu.mcode}'); // 페이지 유지
 		subMenu('${menu.mcode}'.substring(0,3)+"0000");
 	}
 	</script>

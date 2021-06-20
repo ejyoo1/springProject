@@ -9,7 +9,7 @@
     <ul class="navbar-nav main-menu-list">
     	<c:forEach items="${menuList}" var="menu">
     		<li class="nav-item d-none d-sm-inline-block">
-	    		<a href="javascript:subMenu('${menu.mcode}');goPage('${menu.murl}','${menu.mcode}');" class="nav-link"><!-- get Method 호출하는 것. -->
+	    		<a href="javascript:subMenu('${menu.mcode}');goPage('<%=request.getContextPath() %>${menu.murl}','${menu.mcode}');" class="nav-link"><!-- get Method 호출하는 것. -->
 		    		<i class="${menu.micon}"></i>
 		    		${menu.mname}
 	    		</a>

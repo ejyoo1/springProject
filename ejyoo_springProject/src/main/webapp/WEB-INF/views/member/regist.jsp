@@ -131,8 +131,8 @@
    <input type="hidden" name="checkUpload" value="0" />   
 </form>
 
-<script src="/resources/js/member/regist.js"></script>
-<script src="/resources/js/common.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/member/regist.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <script>
 
 </script>

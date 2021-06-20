@@ -104,5 +104,5 @@
 	</div>
 </section>
 
-<script src="/resources/js/common.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 </body><!-- 구분자 역할 -->
