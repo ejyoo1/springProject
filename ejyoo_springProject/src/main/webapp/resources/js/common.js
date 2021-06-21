@@ -12,7 +12,7 @@
 // page : page 번호, url : list url
 // copyright 유은지 2021.06.01 ing~~~~
 function list_go(page, url) {// 페이지 상태 유지 부분
-	alert("page : " + page);
+	//alert("page : " + page);
 	if(!url) url = "list.do"; // url이 없는 경우 처리 ==> '!url' : url이 없으면(사전 방지)
 	
 	var jobForm = $('#jobForm');
@@ -58,6 +58,7 @@ function CloseWindow(parentURL){
 
 // 사용자 사진 미리보기 (서버 호출)
 function MemberPictureThumb(targetObj, fileName){ // (대상, 이미지파일명)
+	alert(fileName+"fileName");
 	targetObj.style.backgroundImage = "url('getPicture.do?picture="+ fileName +"')";// 상대경로 || 절대경로 : member/getPicture.do
 	targetObj.style.backgroundPosition = "center";
 	targetObj.style.backgroundRepeat = "no-repeat";

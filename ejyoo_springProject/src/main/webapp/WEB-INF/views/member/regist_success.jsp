@@ -12,11 +12,11 @@
 	// 톰캣 server.xml 에서 URLEncoding="utf-8" 설정 해야 한글 파라미터가 넘어감.
 	window.onload=function(){ // ajax를 바로 사용할 수 없기때문에 이와 같은 작업을 함.
 		$.ajax({
-			url : "/getMcode.do?mName=회원목록",
+			url : "<%=request.getContextPath()%>/getMcode.do?mName=회원목록",
 			type: "get",
 			contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 			success:function(menu){
-				window.opener.parent.location.href="/index.do?mCode=" + menu.mcode;
+				window.opener.parent.location.href="<%=request.getContextPath()%>/index.do?mCode=" + menu.mcode;
 				window.close();
 			},
 			error : function(error){

@@ -105,7 +105,7 @@ function idCheck_go(){
 	// 유효성에 맞으면 비동기 수행
 	//
 	$.ajax({
-		url:"/member/idCheck.do?id=" + input_ID.val(),
+		url:"idCheck.do?id=" + input_ID.val(),
 		method:"get",
 		success:function(result){
 			console.log(result);
