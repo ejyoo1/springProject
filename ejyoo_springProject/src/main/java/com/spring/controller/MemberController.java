@@ -165,6 +165,16 @@ public class MemberController {
 		return url;
 	}
 	
+	@RequestMapping(value="/modifyForm", method=RequestMethod.GET)
+	public String modify(String id, Model model) throws SQLException {
+		String url = "member/modify";
+		
+		MemberVO member = memberService.getMember(id);
+		model.addAttribute("member",member);
+		
+		return url;
+	}
+	
 	@RequestMapping(value="/modify",method=RequestMethod.POST)
 	public String modify(MemberModifyCommand modifyReq, HttpSession session, Model model) throws Exception{
 		String url = "member/modify_success";
@@ -181,6 +191,43 @@ public class MemberController {
 		}
 		
 		// DB 내용 수정 
+		memberService.modify(member);	
+		
+		// 로그인한 사용자인 경 수정된 정보 session	업로드 
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if (loginUser != null && member.getId().equals(loginUser.getId())) {
+			session.setAttribute("loginUser", member);
+		}
+		
+		model.addAttribute("member",memberService.getMember(modifyReq.getId()));
+		
+		return url;
+	}
+	
+	@RequestMapping(value = "/remove", method=RequestMethod.GET)
+	public String remove(String id, HttpSession session, Model model) throws SQLException{
+		String url = "member/remove_success";
+		
+		MemberVO member;
+		
+		//이미지 파일을 삭제
+		member = memberService.getMember(id);
+		
+		String savePath = this.picturePath;
+		File imageFile = new File(savePath,member.getPicture());
+		if(imageFile.exists()) {
+			imageFile.delete();
+		}
+		
+		// DB삭제
+		memberService.remove(id);
+		
+		// 삭제되는 회원이 로그아웃 회원이면 로그아웃 해야함.
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if(loginUser != null && loginUser.getId().equals(member.getId())) {
+			session.invalidate();
+		}
+		model.addAttribute("member",member);
 		
 		return url;
 	}

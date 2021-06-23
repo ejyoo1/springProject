@@ -31,7 +31,7 @@
   	</section>
   <!-- Main content -->
   <section class="content register-page" >
-	<form role="form" class="form-horizontal" action="/member/modify.do" method="post" enctype="multipart/form-data">	
+	<form role="form" class="form-horizontal" action="<%=request.getContextPath() %>/member/modify.do" method="post" enctype="multipart/form-data">	
 		<div class="register-box" style="min-width:450px;">	
 			<div class="register-card-body">	
 				<div class="row">					
